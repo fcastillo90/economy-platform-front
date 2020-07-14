@@ -3,7 +3,7 @@ import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import Main from './containers/Main'
 
-const DashboardRoutes = () => {
+const PlatformRoutes = () => {
   return (
     <>
       <Switch>
@@ -13,4 +13,4 @@ const DashboardRoutes = () => {
   )
 }
 
-export default DashboardRoutes
+export default PlatformRoutes

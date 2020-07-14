@@ -1,6 +1,10 @@
 import moment from 'moment'
 import Settings from '../services/Settings'
 
+export const changePageTitle = (newTitle = '') => {
+  document.title = `${document.title} - ${newTitle}`
+}
+
 export const shouldReload = (loadedAt) =>
   loadedAt == null || new Date().getTime() - loadedAt.getTime() > Settings.listReloadTime
 export const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1)

@@ -6,7 +6,7 @@ import { ThemeProvider, createMuiTheme } from '@material-ui/core'
 import paletteConfig from '@utils/paletteConfig'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { ThemeContext } from '@src/utils/ThemeContext'
-import DashboardRoutes from './dashboard'
+import PlatformRoutes from './platform'
 
 const Components = () => {
   const { preferDarkMode } = useContext(ThemeContext)
@@ -21,7 +21,7 @@ const Components = () => {
         <Router>
           <MainNavbar />
           <Switch>
-            <Route component={DashboardRoutes} />
+            <Route component={PlatformRoutes} />
           </Switch>
         </Router>
       </ThemeProvider>

@@ -98,7 +98,7 @@ Navbar.propTypes = {
   menu: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string.isRequired,
-      action: PropTypes.string.isRequired,
+      action: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
       icon: PropTypes.object.isRequired,
     }),
   ),

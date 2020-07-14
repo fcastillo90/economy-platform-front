@@ -8,17 +8,17 @@ import { URL_DASHBOARD, URL_GRAPHICS, URL_SEARCH } from './routes'
 export const DRAWER_WIDTH = 240
 export const MAIN_NAVIGATION = [
   {
-    title: 'Dashboard',
+    title: URL_DASHBOARD.title,
     action: URL_DASHBOARD,
     icon: DashboardIcon,
   },
   {
-    title: 'Gráfica',
+    title: URL_GRAPHICS.title,
     action: URL_GRAPHICS,
     icon: ShowChartIcon,
   },
   {
-    title: 'Buscar',
+    title: URL_SEARCH.title,
     action: URL_SEARCH,
     icon: SearchIcon,
   },
