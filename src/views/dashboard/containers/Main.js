@@ -1,9 +1,9 @@
 import React from 'react'
 import { ReactLogo } from '@components/icons'
 
-const App = () => {
+const Main = () => {
   return (
-    <div className="App">
+    <>
       <header className="App-header">
         <ReactLogo className="App-logo" />
         <p>
@@ -18,8 +18,7 @@ const App = () => {
           Learn React
         </a>
       </header>
-    </div>
+    </>
   )
 }
-
-export default App
+export default Main

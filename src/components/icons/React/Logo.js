@@ -1,12 +1,14 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { forwardRef } from 'react'
 import clsx from 'clsx'
+import style from '../styleJss'
 
 export default forwardRef((props, ref) => {
+  const classes = style()
   return (
     <svg
       {...props}
-      className={clsx(props.className)}
+      className={clsx(classes.root, props.className)}
       focusable="false"
       aria-hidden="true"
       // viewBox="0 0 32 32"
