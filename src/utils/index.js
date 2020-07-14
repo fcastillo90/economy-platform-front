@@ -1,8 +1,9 @@
 import moment from 'moment'
+import { PAGE_TITLE } from '@constants'
 import Settings from '../services/Settings'
 
 export const changePageTitle = (newTitle = '') => {
-  document.title = `${document.title} - ${newTitle}`
+  document.title = `${PAGE_TITLE} - ${newTitle}`
 }
 
 export const shouldReload = (loadedAt) =>

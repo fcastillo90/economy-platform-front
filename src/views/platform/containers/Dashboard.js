@@ -1,7 +1,7 @@
 import React from 'react'
 import { ReactLogo } from '@components/icons'
 
-const Main = () => {
+const Dashboard = () => {
   return (
     <>
       <header className="App-header">
@@ -21,4 +21,4 @@ const Main = () => {
     </>
   )
 }
-export default Main
+export default Dashboard
