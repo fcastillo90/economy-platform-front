@@ -2,6 +2,7 @@ import React from 'react'
 import { ReactLogo } from '@components/icons'
 
 const Graphics = () => {
+  console.log('graphi')
   return (
     <>
       <header className="App-header">

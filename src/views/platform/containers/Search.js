@@ -2,6 +2,7 @@ import React from 'react'
 import { ReactLogo } from '@components/icons'
 
 const Search = () => {
+  console.log('search')
   return (
     <>
       <header className="App-header">

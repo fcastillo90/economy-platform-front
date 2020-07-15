@@ -10,8 +10,8 @@ export default () => {
   const { toggleTheme } = useContext(ThemeContext)
   const history = useHistory()
   const setUrl = (page) => {
-    changePageTitle(page.title)
     history.push(page.url)
+    changePageTitle(page.title)
   }
   useEffect(() => {
     const getPageTitle = MAIN_NAVIGATION.find((page) => page.url === history.location.pathname)

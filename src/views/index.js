@@ -2,10 +2,10 @@
 import React, { useMemo, useContext } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { MainNavbar } from '@components/navigation'
-import { ThemeProvider, createMuiTheme } from '@material-ui/core'
+import { ThemeProvider, createMuiTheme, Container } from '@material-ui/core'
 import paletteConfig from '@utils/paletteConfig'
 import CssBaseline from '@material-ui/core/CssBaseline'
-import { ThemeContext } from '@src/utils/ThemeContext'
+import { ThemeContext } from '@utils/ThemeContext'
 import PlatformRoutes from './platform'
 
 const Components = () => {
@@ -17,12 +17,14 @@ const Components = () => {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <CssBaseline />
         <Router>
+          <CssBaseline />
           <MainNavbar />
-          <Switch>
-            <Route component={PlatformRoutes} />
-          </Switch>
+          <Container fixed style={{ paddingTop: 20 }}>
+            <Switch>
+              <Route path="/" component={PlatformRoutes} />
+            </Switch>
+          </Container>
         </Router>
       </ThemeProvider>
     </>

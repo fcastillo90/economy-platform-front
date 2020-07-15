@@ -1,23 +1,16 @@
-import React from 'react'
-import { ReactLogo } from '@components/icons'
+import React, { useCallback } from 'react'
+import { onGetSummary } from '../model'
+import DashboardCardsResume from '../components/DashboardCardsResume'
 
 const Dashboard = () => {
+  const handleQuerySummary = useCallback(async () => {
+    const response = await onGetSummary()
+    if (response.status === 200) return response.data
+    return false
+  }, [])
   return (
     <>
-      <header className="App-header">
-        <ReactLogo className="App-logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <DashboardCardsResume querySummary={handleQuerySummary} />
     </>
   )
 }

@@ -9,8 +9,9 @@ export default {
     apiUrl: process.env.REACT_APP_API_URL,
   },
   path: {
-    apiPath: `path`,
-    composedPath: (parameter) => `path/${parameter}`,
+    last: `economy/last`,
+    values: (key) => `economy/values/${key}`,
+    date: ({ key, date }) => `economy/date/${key}/${date}`,
   },
   buildUrl: (
     url = null,
