@@ -48,3 +48,4 @@ export const dateFormatter = (rawDate) => {
   const date = new Date(rawDate)
   return `${WEEKDAYS[date.getDay()]}, ${date.getDate()} ${MONTHS[date.getMonth()]}`
 }
+export const randomColor = () => `#${Math.floor(Math.random() * 16777215).toString(16)}`
