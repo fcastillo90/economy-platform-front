@@ -30,7 +30,7 @@ export const currencyFormatter = (
   }`
 }
 export const formatNumberToPct = (n) => {
-  if (Number.isNaN(n) || n == null) return ''
+  if (Number.isNaN(n) || n == null) return '0.00%'
   return `${parseFloat(n).toFixed(2)}%`
 }
 export const unitFormatter = ({ unit, value }) => {

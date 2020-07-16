@@ -26,8 +26,9 @@ const Graphics = () => {
   }
   const handleSelectKey = (arrayOfKeys) => {
     if (arrayOfKeys.length !== 0) {
-      setKeyState(arrayOfKeys)
-      arrayOfKeys.forEach((key) => {
+      const newArray = [arrayOfKeys.pop()]
+      setKeyState(newArray)
+      newArray.forEach((key) => {
         if (key instanceof Object) handleChangeKeySelected(key.key)
         else handleChangeKeySelected(key)
       })
