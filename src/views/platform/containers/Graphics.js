@@ -1,10 +1,10 @@
 import React from 'react'
-import '@src/App.css'
 import { ReactLogo } from '@components/icons'
 
-const App = () => {
+const Graphics = () => {
+  console.log('graphi')
   return (
-    <div className="App">
+    <>
       <header className="App-header">
         <ReactLogo className="App-logo" />
         <p>
@@ -19,8 +19,7 @@ const App = () => {
           Learn React
         </a>
       </header>
-    </div>
+    </>
   )
 }
-
-export default App
+export default Graphics

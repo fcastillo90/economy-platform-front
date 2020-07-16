@@ -1,6 +1,6 @@
 version: '3.4'
 services:
-  node:
+  app:
     build:
       context: .
       target: development
@@ -13,10 +13,6 @@ services:
       - web
     volumes:
       - ./:/app
-    labels:
-      - 'traefik.backend=react-seed'
-      - 'traefik.frontend.rule=PathPrefixStrip:/'
-      - 'traefik.weight=100'
 
 networks:
   web:
