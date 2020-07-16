@@ -36,5 +36,12 @@ export default {
         contrastText: '#FFFFFF',
       },
     },
+    overrides: {
+      MuiPickersToolbar: {
+        toolbar: {
+          backgroundColor: '#3f51b5',
+        },
+      },
+    },
   },
 }

@@ -46,7 +46,10 @@ export const unitFormatter = ({ unit, value }) => {
   }
 }
 export const dateFormatter = (rawDate) => {
-  return moment.unix(rawDate).format('ddd, DD MMMM')
+  return moment.unix(rawDate).add(1, 'days').format('ddd, DD MMMM')
 }
 export const randomColor = () => `#${Math.floor(Math.random() * 16777215).toString(16)}`
-export const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1)
+export const capitalizeFirstLetter = (string) => {
+  if (typeof string === 'string') return string.charAt(0).toUpperCase() + string.slice(1)
+  return ''
+}

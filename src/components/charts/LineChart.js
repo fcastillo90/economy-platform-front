@@ -61,7 +61,7 @@ const LineChart = ({ data, keys, handleToggleKey }) => {
     <>
       <ResponsiveContainer width="100%" height={384}>
         <LineChartRecharts
-          data={data}
+          data={data || []}
           margin={{
             top: 5,
             bottom: 5,
@@ -88,7 +88,12 @@ const LineChart = ({ data, keys, handleToggleKey }) => {
 export default LineChart
 
 LineChart.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
-  keys: PropTypes.string.isRequired,
+  data: PropTypes.arrayOf(PropTypes.object),
+  keys: PropTypes.string,
   handleToggleKey: PropTypes.func.isRequired,
+}
+
+LineChart.defaultProps = {
+  data: [],
+  keys: '',
 }

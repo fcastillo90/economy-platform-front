@@ -3,13 +3,13 @@ import { Divider, Typography } from '@material-ui/core'
 import moment from 'moment'
 import HistoricalGraph from '../components/HistoricalGraph'
 import DateQuery from '../components/DateQuery'
-import { onGetSummary, onGetHistorical, lastEPModel, valueEPModel, onGetDate } from '../model'
+import { onGetSummary, onGetHistorical, lastEPModel, onGetDate } from '../model'
 import CardsResume from '../components/CardsResume'
 import styleJss from '../styleJss'
 
 const Dashboard = () => {
   const classes = styleJss()
-  const [state, setState] = useState(valueEPModel)
+  const [state, setState] = useState({})
   const [summaryState, setSummaryState] = useState(lastEPModel)
   const [dateState, setDateState] = useState(moment())
   const [keyDateState, setKeyDateState] = useState([])
@@ -51,12 +51,13 @@ const Dashboard = () => {
   useEffect(() => {
     handleQuerySummary()
   }, [handleQuerySummary])
-  const handleToggleKey = () => setState(valueEPModel)
+  const handleToggleKey = () => setState({})
   return (
     <>
       <Typography variant="h3">Resumen</Typography>
       <CardsResume data={summaryState} action={handleChangeKeySelected} />
       <Divider className={classes.divider} />
+      <Typography variant="h4">Historial</Typography>
       <HistoricalGraph state={state} handleToggleKey={handleToggleKey} />
       <Divider className={classes.divider} />
       <DateQuery
