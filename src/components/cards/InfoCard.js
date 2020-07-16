@@ -22,23 +22,28 @@ const InfoCard = ({ infoObject, action }) => {
           {dateFormatter(date)}
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button onClick={() => action(key)} size="small">
-          Ver historial
-        </Button>
-      </CardActions>
+      {action && (
+        <CardActions>
+          <Button onClick={() => action(key)} size="small">
+            Ver historial
+          </Button>
+        </CardActions>
+      )}
     </Card>
   )
 }
 export default InfoCard
 
 InfoCard.propTypes = {
-  action: PropTypes.func.isRequired,
+  action: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
   infoObject: PropTypes.shape({
     key: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     unit: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     date: PropTypes.number.isRequired,
-    value: PropTypes.number.isRequired,
+    value: PropTypes.number,
   }).isRequired,
+}
+InfoCard.defaultProps = {
+  action: false,
 }

@@ -1,28 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { InfoCard } from '@components/cards'
 import { Grid } from '@material-ui/core'
-import { lastEPModel } from '../model'
 
-const CardsResume = ({ querySummary, action }) => {
-  const [summaryState, setSummaryState] = useState(lastEPModel)
-
-  const handleAction = (e) => {
-    action(e)
-  }
-
-  useEffect(() => {
-    const initSummary = async () => {
-      const response = await querySummary()
-      if (response) setSummaryState(response)
-    }
-    initSummary()
-  }, [querySummary])
+const CardsResume = ({ data, action }) => {
   return (
     <>
       <Grid container direction="row" justify="center" alignItems="center" spacing={2}>
-        {Object.keys(summaryState).map((key) => (
+        {Object.keys(data).map((key) => (
           <Grid item xs key={key}>
-            <InfoCard infoObject={summaryState[key]} action={handleAction} />
+            <InfoCard infoObject={data[key]} action={action} />
           </Grid>
         ))}
       </Grid>

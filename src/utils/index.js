@@ -1,4 +1,5 @@
-import { PAGE_TITLE, CURRENCYISOCODE, WEEKDAYS, MONTHS } from '@constants'
+import { PAGE_TITLE, CURRENCYISOCODE } from '@constants'
+import moment from 'moment'
 
 export const changePageTitle = (newTitle = '') => {
   document.title = `${PAGE_TITLE} - ${newTitle}`
@@ -45,7 +46,7 @@ export const unitFormatter = ({ unit, value }) => {
   }
 }
 export const dateFormatter = (rawDate) => {
-  const date = new Date(rawDate)
-  return `${WEEKDAYS[date.getDay()]}, ${date.getDate()} ${MONTHS[date.getMonth()]}`
+  return moment.unix(rawDate).format('ddd, DD MMMM')
 }
 export const randomColor = () => `#${Math.floor(Math.random() * 16777215).toString(16)}`
+export const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1)

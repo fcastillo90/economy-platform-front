@@ -16,22 +16,30 @@ export const onGetHistorical = (key) =>
     onError,
     onPending,
   })
-
+export const onGetDate = ({ key, date }) =>
+  getFromApi({
+    url: Settings.buildUrl(Settings.urls.apiUrl, Settings.path.date({ key, date })),
+    onSuccess,
+    onError,
+    onPending,
+  })
+export const dateEPModel = { key: '', name: '', unit: '', date: 0, value: 0 }
 export const lastEPModel = {
-  cobre: { key: '', name: '', unit: '', date: 0, value: 0 },
-  dolar: { key: '', name: '', unit: '', date: 0, value: 0 },
-  euro: { key: '', name: '', unit: '', date: 0, value: 0 },
-  ipc: { key: '', name: '', unit: '', date: 0, value: 0 },
-  ivp: { key: '', name: '', unit: '', date: 0, value: 0 },
-  oro: { key: '', name: '', unit: '', date: 0, value: 0 },
-  plata: { key: '', name: '', unit: '', date: 0, value: 0 },
-  uf: { key: '', name: '', unit: '', date: 0, value: 0 },
-  utm: { key: '', name: '', unit: '', date: 0, value: 0 },
-  yen: { key: '', name: '', unit: '', date: 0, value: 0 },
+  cobre: dateEPModel,
+  dolar: dateEPModel,
+  euro: dateEPModel,
+  ipc: dateEPModel,
+  ivp: dateEPModel,
+  oro: dateEPModel,
+  plata: dateEPModel,
+  uf: dateEPModel,
+  utm: dateEPModel,
+  yen: dateEPModel,
 }
 export const valueEPModel = {
   key: '',
   name: '',
   unit: '',
   values: {},
+  graphicData: [],
 }
