@@ -70,3 +70,5 @@ const Dashboard = () => {
   )
 }
 export default Dashboard
+
+Dashboard.propTypes = {}

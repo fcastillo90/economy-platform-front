@@ -44,3 +44,5 @@ const Graphics = () => {
   )
 }
 export default Graphics
+
+Graphics.propTypes = {}

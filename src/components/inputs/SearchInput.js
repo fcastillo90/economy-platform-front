@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Paper, IconButton, TextField } from '@material-ui/core'
 import { Autocomplete } from '@material-ui/lab'
 import MenuIcon from '@material-ui/icons/Menu'
@@ -58,3 +59,9 @@ function SearchInput({ options, keysSelected, onSearch }) {
   )
 }
 export default SearchInput
+
+SearchInput.propTypes = {
+  options: PropTypes.arrayOf(PropTypes.string).isRequired,
+  keysSelected: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onSearch: PropTypes.func.isRequired,
+}

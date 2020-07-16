@@ -23,3 +23,5 @@ const About = () => {
   )
 }
 export default About
+
+About.propTypes = {}
