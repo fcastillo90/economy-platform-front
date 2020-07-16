@@ -11,6 +11,7 @@ import {
   Divider,
   IconButton,
   Typography,
+  Tooltip,
 } from '@material-ui/core'
 import {
   ChevronLeft as ChevronLeftIcon,
@@ -29,7 +30,7 @@ const Navbar = ({ toggleTheme, title, menu, menuAction }) => {
     <>
       <div className={classes.root}>
         <AppBar
-          position="static"
+          position="fixed"
           className={clsx(classes.appBar, {
             [classes.appBarShift]: open,
           })}
@@ -58,35 +59,41 @@ const Navbar = ({ toggleTheme, title, menu, menuAction }) => {
             )}
           </Toolbar>
         </AppBar>
+        {!isEmpty(menu) && (
+          <Drawer
+            variant="permanent"
+            className={clsx(classes.drawer, {
+              [classes.drawerOpen]: open,
+              [classes.drawerClose]: !open,
+            })}
+            classes={{
+              paper: clsx({
+                [classes.drawerOpen]: open,
+                [classes.drawerClose]: !open,
+              }),
+            }}
+          >
+            <div className={classes.drawerHeader}>
+              <IconButton onClick={handleToggleDrawer}>
+                <ChevronLeftIcon />
+              </IconButton>
+            </div>
+            <Divider />
+            <List>
+              {menu.map((menuItem) => (
+                <ListItem button key={menuItem.title} onClick={() => menuAction(menuItem.action)}>
+                  <ListItemIcon>
+                    <Tooltip title={menuItem.title}>
+                      <menuItem.icon />
+                    </Tooltip>
+                  </ListItemIcon>
+                  <ListItemText primary={menuItem.title} />
+                </ListItem>
+              ))}
+            </List>
+          </Drawer>
+        )}
       </div>
-      {!isEmpty(menu) && (
-        <Drawer
-          className={classes.drawer}
-          variant="persistent"
-          anchor="left"
-          open={open}
-          classes={{
-            paper: classes.drawerPaper,
-          }}
-        >
-          <div className={classes.drawerHeader}>
-            <IconButton onClick={handleToggleDrawer}>
-              <ChevronLeftIcon />
-            </IconButton>
-          </div>
-          <Divider />
-          <List>
-            {menu.map((menuItem) => (
-              <ListItem button key={menuItem.title} onClick={() => menuAction(menuItem.action)}>
-                <ListItemIcon>
-                  <menuItem.icon />
-                </ListItemIcon>
-                <ListItemText primary={menuItem.title} />
-              </ListItem>
-            ))}
-          </List>
-        </Drawer>
-      )}
     </>
   )
 }

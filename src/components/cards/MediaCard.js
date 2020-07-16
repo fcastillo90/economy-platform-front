@@ -1,17 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Card, CardActions, CardContent, Button, Typography, Tooltip } from '@material-ui/core'
+import { Card, CardContent, Typography, Tooltip } from '@material-ui/core'
 import { unitFormatter, dateFormatter } from '@utils'
 import styleJss from './styleJss'
 
-const InfoCard = ({ infoObject, action, noWrap }) => {
+// eslint-disable-next-line no-unused-vars
+const MediaCard = ({ action, infoObject }) => {
   const classes = styleJss()
-  const { key, name, unit, date, value } = infoObject
+  const { name, unit, date, value } = infoObject
   return (
-    <Card className={classes.root}>
-      <CardContent>
+    <Card className={classes.rootMedia}>
+      <CardContent className={classes.content}>
         <Tooltip title={name}>
-          <Typography className={classes.title} color="textSecondary" noWrap={noWrap} gutterBottom>
+          <Typography className={classes.title} color="textSecondary" noWrap gutterBottom>
             {name}
           </Typography>
         </Tooltip>
@@ -22,19 +23,12 @@ const InfoCard = ({ infoObject, action, noWrap }) => {
           {dateFormatter(date)}
         </Typography>
       </CardContent>
-      {action && (
-        <CardActions>
-          <Button onClick={() => action(key)} size="small">
-            Ver historial
-          </Button>
-        </CardActions>
-      )}
     </Card>
   )
 }
-export default InfoCard
+export default MediaCard
 
-InfoCard.propTypes = {
+MediaCard.propTypes = {
   action: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
   infoObject: PropTypes.shape({
     key: PropTypes.string.isRequired,
@@ -43,9 +37,7 @@ InfoCard.propTypes = {
     date: PropTypes.number.isRequired,
     value: PropTypes.number,
   }).isRequired,
-  noWrap: PropTypes.bool,
 }
-InfoCard.defaultProps = {
+MediaCard.defaultProps = {
   action: false,
-  noWrap: true,
 }

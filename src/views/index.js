@@ -20,7 +20,7 @@ const Components = () => {
         <Router>
           <CssBaseline />
           <MainNavbar />
-          <Container fixed style={{ paddingTop: 20 }}>
+          <Container fixed style={{ paddingTop: 96 }}>
             <Switch>
               <Route path="/" component={PlatformRoutes} />
             </Switch>

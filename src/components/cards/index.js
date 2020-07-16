@@ -1,2 +1,2 @@
-// eslint-disable-next-line import/prefer-default-export
 export { default as InfoCard } from './InfoCard'
+export { default as MediaCard } from './MediaCard'

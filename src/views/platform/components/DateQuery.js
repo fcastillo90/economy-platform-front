@@ -5,12 +5,20 @@ import { InfoCard } from '@components/cards'
 import MomentUtils from '@date-io/moment'
 import { Grid } from '@material-ui/core'
 import moment from 'moment'
+import { SearchInput } from '@components/inputs'
+import { KEYS } from '@constants'
 
-const DateQuery = ({ date, handleChangeDate, value }) => {
+const DateQuery = ({ date, handleChangeDate, value, handleQuery }) => {
+  const handleSelectKey = (arrayOfKeys) => {
+    arrayOfKeys.forEach((key) => {
+      if (key instanceof Object) handleQuery(key.key)
+      else handleQuery(key)
+    })
+  }
   return (
     <>
       <MuiPickersUtilsProvider utils={MomentUtils}>
-        <Grid container direction="row" justify="space-between" alignItems="center" spacing={2}>
+        <Grid container direction="row" justify="space-between" alignItems="flex-start" spacing={2}>
           <Grid item>
             <DatePicker
               autoOk
@@ -22,8 +30,15 @@ const DateQuery = ({ date, handleChangeDate, value }) => {
               onChange={handleChangeDate}
             />
           </Grid>
-          <Grid item>
-            <InfoCard infoObject={value} />
+          <Grid container item xs alignItems="flex-start" spacing={2}>
+            <Grid item xs={12}>
+              <SearchInput options={KEYS} keysSelected={value} onSearch={handleSelectKey} />
+            </Grid>
+            {value.map((query) => (
+              <Grid item key={query.key}>
+                <InfoCard infoObject={query} noWrap={false} />
+              </Grid>
+            ))}
           </Grid>
         </Grid>
       </MuiPickersUtilsProvider>
@@ -35,11 +50,14 @@ export default DateQuery
 DateQuery.propTypes = {
   date: PropTypes.instanceOf(moment).isRequired,
   handleChangeDate: PropTypes.func.isRequired,
-  value: PropTypes.shape({
-    key: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    unit: PropTypes.string.isRequired,
-    date: PropTypes.number.isRequired,
-    value: PropTypes.number,
-  }).isRequired,
+  handleQuery: PropTypes.func.isRequired,
+  value: PropTypes.arrayOf(
+    PropTypes.shape({
+      key: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      unit: PropTypes.string.isRequired,
+      date: PropTypes.number.isRequired,
+      value: PropTypes.number,
+    }),
+  ).isRequired,
 }
