@@ -17,6 +17,7 @@ function SearchInput({ options, keysSelected, onSearch }) {
         multiple
         options={options}
         value={keysSelected}
+        getOptionSelected={(option, value) => value.key === option}
         getOptionLabel={(option) => capitalizeFirstLetter(option.key || option)}
         onChange={(_, value) => onSearch(value)}
         renderInput={(params) => {
