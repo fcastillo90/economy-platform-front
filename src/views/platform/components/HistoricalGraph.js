@@ -3,12 +3,17 @@ import PropTypes from 'prop-types'
 import { Grid } from '@material-ui/core'
 import { LineChart } from '@components/charts'
 
-const HistoricalGraph = ({ state, handleToggleKey }) => {
+const HistoricalGraph = ({ state, handleToggleKey, handleChartClick }) => {
   return (
     <>
       <Grid container direction="row" justify="center" alignItems="center" spacing={2}>
         <Grid item xs={12}>
-          <LineChart data={state.graphicData} keys={state.key} handleToggleKey={handleToggleKey} />
+          <LineChart
+            data={state.graphicData}
+            keys={state.key}
+            handleToggleKey={handleToggleKey}
+            handleChartClick={handleChartClick}
+          />
         </Grid>
       </Grid>
     </>
@@ -25,8 +30,10 @@ HistoricalGraph.propTypes = {
     graphicData: PropTypes.arrayOf(PropTypes.object),
   }),
   handleToggleKey: PropTypes.func.isRequired,
+  handleChartClick: PropTypes.func,
 }
 
 HistoricalGraph.defaultProps = {
   state: {},
+  handleChartClick: () => {},
 }

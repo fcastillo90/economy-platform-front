@@ -41,7 +41,7 @@ const CustomTooltip = ({ active, payload, label }) => {
 
   return null
 }
-const LineChart = ({ data, keys, handleToggleKey }) => {
+const LineChart = ({ data, keys, handleToggleKey, handleChartClick }) => {
   const theme = useTheme()
   const renderLegend = ({ payload }) => {
     return (
@@ -66,6 +66,7 @@ const LineChart = ({ data, keys, handleToggleKey }) => {
             top: 5,
             bottom: 5,
           }}
+          onClick={(e) => handleChartClick(e.activeLabel)}
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="date" />
@@ -91,9 +92,11 @@ LineChart.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object),
   keys: PropTypes.string,
   handleToggleKey: PropTypes.func.isRequired,
+  handleChartClick: PropTypes.func,
 }
 
 LineChart.defaultProps = {
   data: [],
   keys: '',
+  handleChartClick: () => {},
 }

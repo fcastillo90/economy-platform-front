@@ -48,6 +48,11 @@ const Dashboard = () => {
     setKeyDateState([])
     handleChangeDateSelected(moment(newDate).format('DD-MM-YYYY'))
   }
+  const handleChartClick = (date) => {
+    if (moment(date, 'DD-MM-YYYY').isValid()) {
+      handleChangeDate(moment(date, 'DD-MM-YYYY'))
+    }
+  }
   useEffect(() => {
     handleQuerySummary()
   }, [handleQuerySummary])
@@ -58,7 +63,11 @@ const Dashboard = () => {
       <CardsResume data={summaryState} action={handleChangeKeySelected} />
       <Divider className={classes.divider} />
       <Typography variant="h4">Historial</Typography>
-      <HistoricalGraph state={state} handleToggleKey={handleToggleKey} />
+      <HistoricalGraph
+        state={state}
+        handleToggleKey={handleToggleKey}
+        handleChartClick={handleChartClick}
+      />
       <Divider className={classes.divider} />
       <DateQuery
         value={keyDateState}
