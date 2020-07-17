@@ -6,6 +6,7 @@ import { Autocomplete } from '@material-ui/lab'
 import MenuIcon from '@material-ui/icons/Menu'
 import SearchIcon from '@material-ui/icons/Search'
 import { capitalizeFirstLetter } from '@utils'
+import { doesArrayContains } from '@validations'
 import styleJss from './styleJss'
 
 function SearchInput({ options, keysSelected, onSearch, onDeleteSelected }) {
@@ -15,6 +16,9 @@ function SearchInput({ options, keysSelected, onSearch, onDeleteSelected }) {
       (keyObject) => JSON.stringify(singleChip) !== JSON.stringify(keyObject),
     )
     onDeleteSelected(newValue)
+  }
+  const handleSearchIconClick = (value) => {
+    if (doesArrayContains(value, options)) onSearch([value])
   }
   return (
     <Paper component="form" className={classes.root}>
@@ -44,7 +48,7 @@ function SearchInput({ options, keysSelected, onSearch, onDeleteSelected }) {
                 ...params.InputProps,
                 endAdornment: (
                   <IconButton
-                    onClick={() => onSearch(params)}
+                    onClick={() => handleSearchIconClick(params.inputProps.value)}
                     className={classes.iconButton}
                     aria-label="search"
                   >

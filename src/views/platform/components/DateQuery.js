@@ -41,7 +41,7 @@ const DateQuery = ({ date, handleChangeDate, value, handleQuery, onDeleteSelecte
             </Grid>
             {value.map((query) => (
               <Grid item key={query.key}>
-                <InfoCard infoObject={query} noWrap={false} />
+                <InfoCard infoObject={query} />
               </Grid>
             ))}
           </Grid>
