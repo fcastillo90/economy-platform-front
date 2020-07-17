@@ -5,4 +5,7 @@ export default makeStyles((theme) => ({
     marginTop: theme.spacing(4),
     marginBottom: theme.spacing(4),
   },
+  size: {
+    fontSize: 128,
+  },
 }))
