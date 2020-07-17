@@ -4,14 +4,14 @@ import { Card, CardActions, CardContent, Button, Typography, Tooltip } from '@ma
 import { unitFormatter, dateFormatter } from '@utils'
 import styleJss from './styleJss'
 
-const InfoCard = ({ infoObject, action }) => {
+const InfoCard = ({ infoObject, action, noWrap }) => {
   const classes = styleJss()
   const { key, name, unit, date, value } = infoObject
   return (
     <Card className={classes.root}>
       <CardContent>
         <Tooltip title={name}>
-          <Typography className={classes.title} color="textSecondary" noWrap gutterBottom>
+          <Typography className={classes.title} color="textSecondary" noWrap={noWrap} gutterBottom>
             {name}
           </Typography>
         </Tooltip>
@@ -43,7 +43,9 @@ InfoCard.propTypes = {
     date: PropTypes.number.isRequired,
     value: PropTypes.number,
   }).isRequired,
+  noWrap: PropTypes.bool,
 }
 InfoCard.defaultProps = {
   action: false,
+  noWrap: true,
 }

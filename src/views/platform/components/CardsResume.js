@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { InfoCard } from '@components/cards'
 import { Grid } from '@material-ui/core'
 
@@ -16,3 +17,14 @@ const CardsResume = ({ data, action }) => {
   )
 }
 export default CardsResume
+
+CardsResume.propTypes = {
+  data: PropTypes.shape({
+    key: PropTypes.string,
+    name: PropTypes.string,
+    unit: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    date: PropTypes.number,
+    value: PropTypes.number,
+  }).isRequired,
+  action: PropTypes.func.isRequired,
+}

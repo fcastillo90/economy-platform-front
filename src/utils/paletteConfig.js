@@ -2,14 +2,20 @@ export default {
   lightTheme: {
     palette: {
       type: 'light',
+      background: {
+        paper: '#f7f7f7',
+        default: '#fff',
+      },
       primary: {
-        light: '#a9d7d2',
-        main: '#2a9d8f',
-        dark: '#154e47',
+        light: '#6573c3',
+        main: '#3f51b5',
+        dark: '#2c387e',
         contrastText: '#FFFFFF',
       },
       secondary: {
-        main: '#e76f51',
+        light: '#ff4569',
+        main: '#ff1744',
+        dark: '#b2102f',
         contrastText: '#FFFFFF',
       },
     },
@@ -18,14 +24,23 @@ export default {
     palette: {
       type: 'dark',
       primary: {
-        light: '#a8b5ba',
-        main: '#264653',
-        dark: '#162a31',
+        light: '#6573c3',
+        main: '#3f51b5',
+        dark: '#2c387e',
         contrastText: '#FFFFFF',
       },
       secondary: {
-        main: '#e76f51',
+        light: '#ff4569',
+        main: '#ff1744',
+        dark: '#b2102f',
         contrastText: '#FFFFFF',
+      },
+    },
+    overrides: {
+      MuiPickersToolbar: {
+        toolbar: {
+          backgroundColor: '#3f51b5',
+        },
       },
     },
   },

@@ -3,23 +3,16 @@ import { Divider, Typography } from '@material-ui/core'
 import moment from 'moment'
 import HistoricalGraph from '../components/HistoricalGraph'
 import DateQuery from '../components/DateQuery'
-import {
-  onGetSummary,
-  onGetHistorical,
-  dateEPModel,
-  lastEPModel,
-  valueEPModel,
-  onGetDate,
-} from '../model'
+import { onGetSummary, onGetHistorical, lastEPModel, onGetDate } from '../model'
 import CardsResume from '../components/CardsResume'
 import styleJss from '../styleJss'
 
 const Dashboard = () => {
   const classes = styleJss()
-  const [state, setState] = useState(valueEPModel)
+  const [state, setState] = useState({})
   const [summaryState, setSummaryState] = useState(lastEPModel)
   const [dateState, setDateState] = useState(moment())
-  const [keyDateState, setKeyDateState] = useState(dateEPModel)
+  const [keyDateState, setKeyDateState] = useState([])
 
   const handleQuerySummary = useCallback(async () => {
     const response = await onGetSummary()
@@ -31,9 +24,13 @@ const Dashboard = () => {
     return false
   }
   const handleChangeDateSelected = async (date, key) => {
-    if (date && (state.key !== '' || key)) {
-      const response = await onGetDate({ key: state.key || key, date })
-      if (response) setKeyDateState(response.data)
+    if (date && key) {
+      const response = await onGetDate({ key, date })
+      if (response) setKeyDateState((oldState) => [...oldState, response.data])
+    } else {
+      keyDateState.forEach((keyToUpdate) => {
+        handleChangeDateSelected(date, keyToUpdate.key)
+      })
     }
   }
   const handleChangeKeySelected = async (key) => {
@@ -41,24 +38,47 @@ const Dashboard = () => {
     if (response) setState(response)
     handleChangeDateSelected(moment(dateState).format('DD-MM-YYYY'), key)
   }
-
+  const handleQuery = async (key) => {
+    if (!keyDateState.find((keyObject) => keyObject.key === key)) {
+      handleChangeDateSelected(moment(dateState).format('DD-MM-YYYY'), key)
+    }
+  }
   const handleChangeDate = (newDate) => {
     setDateState(newDate)
+    setKeyDateState([])
     handleChangeDateSelected(moment(newDate).format('DD-MM-YYYY'))
+  }
+  const handleChartClick = (date) => {
+    if (moment(date, 'DD-MM-YYYY').isValid()) {
+      handleChangeDate(moment(date, 'DD-MM-YYYY'))
+    }
   }
   useEffect(() => {
     handleQuerySummary()
   }, [handleQuerySummary])
-  const handleToggleKey = () => setState(valueEPModel)
+  const handleToggleKey = () => setState({})
   return (
     <>
       <Typography variant="h3">Resumen</Typography>
       <CardsResume data={summaryState} action={handleChangeKeySelected} />
       <Divider className={classes.divider} />
-      <HistoricalGraph state={state} handleToggleKey={handleToggleKey} />
+      <Typography variant="h4">Historial</Typography>
+      <HistoricalGraph
+        state={state}
+        handleToggleKey={handleToggleKey}
+        handleChartClick={handleChartClick}
+      />
       <Divider className={classes.divider} />
-      <DateQuery value={keyDateState} date={dateState} handleChangeDate={handleChangeDate} />
+      <DateQuery
+        value={keyDateState}
+        date={dateState}
+        handleChangeDate={handleChangeDate}
+        handleQuery={handleQuery}
+        onDeleteSelected={setKeyDateState}
+      />
     </>
   )
 }
 export default Dashboard
+
+Dashboard.propTypes = {}
