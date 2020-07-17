@@ -1,15 +1,21 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Paper, IconButton, TextField } from '@material-ui/core'
+import { Paper, IconButton, TextField, Chip } from '@material-ui/core'
 import { Autocomplete } from '@material-ui/lab'
 import MenuIcon from '@material-ui/icons/Menu'
 import SearchIcon from '@material-ui/icons/Search'
 import { capitalizeFirstLetter } from '@utils'
 import styleJss from './styleJss'
 
-function SearchInput({ options, keysSelected, onSearch }) {
+function SearchInput({ options, keysSelected, onSearch, onDeleteSelected }) {
   const classes = styleJss()
+  const onToggleSelected = (singleChip) => {
+    const newValue = keysSelected.filter(
+      (keyObject) => JSON.stringify(singleChip) !== JSON.stringify(keyObject),
+    )
+    onDeleteSelected(newValue)
+  }
   return (
     <Paper component="form" className={classes.root}>
       <Autocomplete
@@ -20,6 +26,15 @@ function SearchInput({ options, keysSelected, onSearch }) {
         getOptionSelected={(option, value) => value.key === option}
         getOptionLabel={(option) => capitalizeFirstLetter(option.key || option)}
         onChange={(_, value) => onSearch(value)}
+        renderTags={(value) =>
+          value.map((singleChip) => (
+            <Chip
+              key={singleChip.key}
+              label={capitalizeFirstLetter(singleChip.key)}
+              onDelete={() => onToggleSelected(singleChip)}
+            />
+          ))
+        }
         renderInput={(params) => {
           return (
             <TextField
@@ -65,4 +80,5 @@ SearchInput.propTypes = {
   options: PropTypes.arrayOf(PropTypes.string).isRequired,
   keysSelected: PropTypes.arrayOf(PropTypes.object).isRequired,
   onSearch: PropTypes.func.isRequired,
+  onDeleteSelected: PropTypes.func.isRequired,
 }

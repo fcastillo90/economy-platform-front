@@ -26,7 +26,7 @@ const Dashboard = () => {
   const handleChangeDateSelected = async (date, key) => {
     if (date && key) {
       const response = await onGetDate({ key, date })
-      if (response) setKeyDateState((oldState) => [response.data, ...oldState])
+      if (response) setKeyDateState((oldState) => [...oldState, response.data])
     } else {
       keyDateState.forEach((keyToUpdate) => {
         handleChangeDateSelected(date, keyToUpdate.key)
@@ -65,6 +65,7 @@ const Dashboard = () => {
         date={dateState}
         handleChangeDate={handleChangeDate}
         handleQuery={handleQuery}
+        onDeleteSelected={setKeyDateState}
       />
     </>
   )

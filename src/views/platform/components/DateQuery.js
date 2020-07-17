@@ -8,7 +8,7 @@ import moment from 'moment'
 import { SearchInput } from '@components/inputs'
 import { KEYS } from '@constants'
 
-const DateQuery = ({ date, handleChangeDate, value, handleQuery }) => {
+const DateQuery = ({ date, handleChangeDate, value, handleQuery, onDeleteSelected }) => {
   const handleSelectKey = (arrayOfKeys) => {
     arrayOfKeys.forEach((key) => {
       if (key instanceof Object) handleQuery(key.key)
@@ -32,7 +32,12 @@ const DateQuery = ({ date, handleChangeDate, value, handleQuery }) => {
           </Grid>
           <Grid container item xs alignItems="flex-start" spacing={2}>
             <Grid item xs={12}>
-              <SearchInput options={KEYS} keysSelected={value} onSearch={handleSelectKey} />
+              <SearchInput
+                options={KEYS}
+                keysSelected={value}
+                onSearch={handleSelectKey}
+                onDeleteSelected={onDeleteSelected}
+              />
             </Grid>
             {value.map((query) => (
               <Grid item key={query.key}>

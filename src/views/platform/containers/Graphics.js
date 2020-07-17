@@ -34,7 +34,12 @@ const Graphics = () => {
   return (
     <>
       <Typography variant="h3">Historial</Typography>
-      <SearchInput options={KEYS} keysSelected={state} onSearch={handleSelectKey} />
+      <SearchInput
+        options={KEYS}
+        keysSelected={state}
+        onSearch={handleSelectKey}
+        onDeleteSelected={setState}
+      />
       <Divider className={classes.divider} />
       <HistoricalGraph state={state[0] || {}} handleToggleKey={handleToggleKey} />
     </>
