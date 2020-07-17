@@ -60,5 +60,9 @@ export default makeStyles((theme) => ({
     [theme.breakpoints.up('sm')]: {
       width: theme.spacing(9) + 1,
     },
+
+    [theme.breakpoints.down('sm')]: {
+      width: 0,
+    },
   },
 }))
