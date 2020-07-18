@@ -1,38 +1,106 @@
-# React seed - Francisco Castillo
+# Economy Platform - Francisco Castillo
 
-### `React, Eslint, Prettier, Docker multistage, path alias, Husky, helpers, own architecture and more`
+### `ReactJS, Docker multistage, Eslint, Prettier, path alias, Husky, Jest, axios, helpers, entre otros`
 
-## Available Scripts
-
-In the project directory, you can run:
-
+## Scripts Disponibles
 ### `docker-compose -f docker-compose-local.yml up --force-recreate`
-
-Runs the app in the development mode.<br />
-Open [http://localhost:8082](http://localhost:8082) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
 ### `yarn start`
-
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
 ### `yarn test`
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
+## Para iniciar la aplicación, debes:
+<br /> `yarn install`
+<br /> `docker-compose -f docker-compose-local.yml up --force-recreate`
+<br /> `Abrir en tu navegador [http://localhost:8082](http://localhost:8082)`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+ó
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+<br /> `yarn install`
+<br /> `yarn start`
+<br /> `Abrir en tu navegador [http://localhost:3000](http://localhost:3000)`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Para iniciar las pruebas, debes:
+<br /> `yarn test`
+
+## Estructura de archivos:
+* Docker multistage separando la etapa de desarrollo, build y servidor nginx, que permite así tener un contenedor mucho más atómico (menos peso) y ambientes más controlados.
+* Husky configurado para evitar commits con errores de código.
+* ESLint y Prettier para mejores prácticas.
+* Direcciones con ALIAS para mejor legibilidad de código.
+* URL en archivo .env para gestionar fácilmente las variables de los distintos ambientes (dev, QA, prod) de la plataforma.
+* Se hace un ruteo de 2 niveles para mayor visión y escalabilidad de la plataforma (App.js y los index.js de cada contesto Ej: platform).
+* Se divide los componentes transversales y comunes a la plataforma en la carpeta components y las vistas en Views.
+* Las vistas en la carpeta views están divididas por contexto, en este caso hay uno solo que es el platform. En él se sigue el estilo de modelo, vista, controlador haciendo una separación entre un componente principal que maneja la lógica y subcomponentes "brutos" que reciben toda la data por props.
+* Cada contexto de vista tiene su propio set de pruebas, así como estilos y enrutador.
+* Se tiene carpetas de constantes, validaciones y utilidades comúnmente utilizadas a lo largo de toda la aplicación.
+* La carpeta services es donde almacenamos una función helper centralizada de axios, el constructor de URL y las funciones comunes a ejecutar en caso del request tener éxito, fallo o en proceso.
+* Los componentes comunes están divididos en carpetas distintas según contexto, conteniendo así un archivo exportador principal (index) que hace disponible de manera sencilla cada uno de sus componentes internos.
+
+```
+.
+├── App.js
+├── components
+│   ├── cards
+│   │   ├── Cards.test.js
+│   │   ├── InfoCard.js
+│   │   ├── index.js
+│   │   └── styleJss.js
+│   ├── charts
+│   │   ├── Charts.test.js
+│   │   ├── LineChart.js
+│   │   └── index.js
+│   ├── icons
+│   │   ├── Icons.test.js
+│   │   ├── React
+│   │   │   ├── Logo.js
+│   │   │   └── index.js
+│   │   ├── index.js
+│   │   └── styleJss.js
+│   ├── inputs
+│   │   ├── Input.test.js
+│   │   ├── SearchInput.js
+│   │   ├── index.js
+│   │   └── styleJss.js
+│   ├── navbar
+│   │   ├── Navbar.js
+│   │   ├── Navbar.test.js
+│   │   ├── index.js
+│   │   └── styleJss.js
+│   └── navigation
+│       ├── MainNavbar.js
+│       ├── Navigation.test.js
+│       └── index.js
+├── constants
+│   ├── index.js
+│   └── routes.js
+├── index.js
+├── serviceWorker.js
+├── services
+│   ├── Common.js
+│   ├── Settings.js
+│   └── index.js
+├── setupTests.js
+├── utils
+│   ├── ThemeContext.js
+│   ├── index.js
+│   └── paletteConfig.js
+├── validations
+│   └── index.js
+└── views
+    ├── Views.test.js
+    ├── index.js
+    └── platform
+        ├── Platform.test.js
+        ├── components
+        │   ├── CardsResume.js
+        │   ├── DateQuery.js
+        │   └── HistoricalGraph.js
+        ├── containers
+        │   ├── About.js
+        │   ├── Dashboard.js
+        │   ├── Graphics.js
+        │   └── Search.js
+        ├── index.js
+        ├── model.js
+        └── styleJss.js
+```
