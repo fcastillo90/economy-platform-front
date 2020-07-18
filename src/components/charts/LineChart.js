@@ -91,7 +91,7 @@ export default LineChart
 LineChart.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object),
   keys: PropTypes.string,
-  handleToggleKey: PropTypes.func.isRequired,
+  handleToggleKey: PropTypes.func,
   handleChartClick: PropTypes.func,
 }
 
@@ -99,4 +99,5 @@ LineChart.defaultProps = {
   data: [],
   keys: '',
   handleChartClick: () => {},
+  handleToggleKey: () => {},
 }

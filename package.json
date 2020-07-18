@@ -1,6 +1,6 @@
 {
-  "name": "react-seed",
-  "version": "0.3.0",
+  "name": "economy-platform-front",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@date-io/moment": "1.x",
