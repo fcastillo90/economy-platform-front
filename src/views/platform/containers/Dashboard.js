@@ -26,21 +26,26 @@ const Dashboard = () => {
   const handleChangeDateSelected = async (date, key) => {
     if (date && key) {
       const response = await onGetDate({ key, date })
-      if (response) setKeyDateState((oldState) => [...oldState, response.data])
+      if (response.status === 200) setKeyDateState((oldState) => [...oldState, response.data])
     } else {
-      keyDateState.forEach((keyToUpdate) => {
+      const keysToQuery = [...keyDateState]
+      keysToQuery.forEach((keyToUpdate) => {
         handleChangeDateSelected(date, keyToUpdate.key)
       })
     }
   }
   const handleChangeKeySelected = async (key) => {
-    const response = await handleQueryHistoricalValues(key)
-    if (response) setState(response)
-    handleChangeDateSelected(moment(dateState).format('DD-MM-YYYY'), key)
+    if (key) {
+      const response = await handleQueryHistoricalValues(key)
+      if (response) setState(response)
+      handleChangeDateSelected(moment(dateState).format('DD-MM-YYYY'), key)
+    }
   }
   const handleQuery = async (key) => {
-    if (!keyDateState.find((keyObject) => keyObject.key === key)) {
-      handleChangeDateSelected(moment(dateState).format('DD-MM-YYYY'), key)
+    if (key) {
+      if (!keyDateState.find((keyObject) => keyObject.key === key)) {
+        handleChangeDateSelected(moment(dateState).format('DD-MM-YYYY'), key)
+      }
     }
   }
   const handleChangeDate = (newDate) => {

@@ -11,7 +11,7 @@ const Search = () => {
   const handleChangeDateSelected = async (date, key) => {
     if (date && key) {
       const response = await onGetDate({ key, date })
-      if (response) setKeyDateState((oldState) => [...oldState, response.data])
+      if (response === 200) setKeyDateState((oldState) => [...oldState, response.data])
     } else {
       keyDateState.forEach((keyToUpdate) => {
         handleChangeDateSelected(date, keyToUpdate.key)

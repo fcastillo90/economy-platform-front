@@ -30,7 +30,7 @@ export const getFromApi = async ({
     .catch((error) => {
       return onError({
         status: error.response?.status || 400,
-        data: error.response?.statusText || 'cors',
+        data: error.response?.statusText || '',
       })
     })
 }
