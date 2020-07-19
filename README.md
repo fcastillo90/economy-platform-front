@@ -22,7 +22,7 @@
 ## Para iniciar las pruebas, debes:
 <br /> `yarn test`
 
-## Estructura de archivos:
+## Resumen:
 * Docker multistage separando la etapa de desarrollo, build y servidor nginx, que permite así tener un contenedor mucho más atómico (menos peso) y ambientes más controlados.
 * Husky configurado para evitar commits con errores de código.
 * ESLint y Prettier para mejores prácticas.
@@ -36,6 +36,7 @@
 * La carpeta services es donde almacenamos una función helper centralizada de axios, el constructor de URL y las funciones comunes a ejecutar en caso del request tener éxito, fallo o en proceso.
 * Los componentes comunes están divididos en carpetas distintas según contexto, conteniendo así un archivo exportador principal (index) que hace disponible de manera sencilla cada uno de sus componentes internos.
 
+## Estructura de archivos:
 ```
 .
 ├── App.js
